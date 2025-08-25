@@ -14,10 +14,10 @@ jobs:
         with:
           version: 8
       - run: pnpm install
-        working-directory: myblog/app
+        working-directory: app
       - run: pnpm run build
-        working-directory: myblog/app
+        working-directory: app
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./myblog/app/dist
+          publish_dir: ./app/dist
