@@ -2,10 +2,47 @@
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+type BlogItem = {
+  title: string;
+  body: string;
+};
+
+const API_URL = 'https://can2blog.microcms.io/api/v1/blogs';
+const API_KEY = import.meta.env.MICROCMS_API_KEY;
+
+let data: { contents: BlogItem[] } = { contents: [] };
+let error = '';
+
+try {
+  const res = await fetch(API_URL, {
+    headers: { 'X-API-KEY': API_KEY }
+  });
+  if (!res.ok) {
+    error = `APIエラー: ${res.status} ${res.statusText}`;
+  } else {
+    data = await res.json();
+  }
+} catch (e) {
+  const err = e as Error;
+  error = `通信エラー: ${err.message}`;
+}
 ---
 
 <Layout>
 	<Welcome />
 </Layout>
+
+<h2>記事一覧</h2>
+{error
+  ? <p style="color:red">{error}</p>
+  : (
+    <ul>
+      {data.contents.map((item) => (
+        <li>
+          <strong>{item.title}</strong><br />
+          <span>{item.body}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
