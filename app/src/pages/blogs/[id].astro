@@ -11,6 +11,9 @@ export async function getStaticPaths() {
   const API_URL = import.meta.env.MICROCMS_API_URL;
   const API_KEY = import.meta.env.MICROCMS_API_KEY;
 
+  if (!API_URL) throw new Error('MICROCMS_API_URL is undefined');
+  if (!API_KEY) throw new Error('MICROCMS_API_KEY is undefined');
+
   const res = await fetch(API_URL, {
     headers: { 'X-API-KEY': API_KEY }
   });
@@ -29,6 +32,9 @@ let data: { title: string; body: string } = { title: '', body: '' };
 let error = '';
 
 try {
+  if (!API_URL) throw new Error('MICROCMS_API_URL is undefined');
+  if (!API_KEY) throw new Error('MICROCMS_API_KEY is undefined');
+
   const res = await fetch(API_URL, {
     headers: { 'X-API-KEY': API_KEY }
   });
