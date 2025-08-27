@@ -3,6 +3,7 @@ import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
 type BlogItem = {
+  id: string;
   title: string;
   body: string;
 };
@@ -26,26 +27,25 @@ try {
   const err = e as Error;
   error = `通信エラー: ${err.message}`;
 }
-
-console.log('API_URL:', API_URL);
-console.log('API_KEY:', API_KEY);
 ---
 
 <Layout>
 	<Welcome />
 </Layout>
 
-<h1>記事一覧</h1>
+<h2>記事一覧</h2>
 {error
   ? <p style="color:red">{error}</p>
   : (
     <ul>
       {data.contents.map((item) => (
         <li>
-          <strong>{item.title}</strong><br />
-          <span>{item.body}</span>
+          <a href={`/blogs/${item.id}`}><strong>{item.title}</strong></a>
         </li>
       ))}
+    </ul>
+  )
+}
     </ul>
   )
 }

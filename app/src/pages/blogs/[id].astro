@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const { id } = Astro.params;
+const API_URL = `https://can2blog.microcms.io/api/v1/blogs/${id}`;
+const API_KEY = import.meta.env.MICROCMS_API_KEY;
+
+let data: { title: string; body: string } = { title: '', body: '' };
+let error = '';
+
+try {
+  const res = await fetch(API_URL, {
+    headers: { 'X-API-KEY': API_KEY }
+  });
+  if (!res.ok) {
+    error = `APIエラー: ${res.status} ${res.statusText}`;
+  } else {
+    data = await res.json();
+  }
+} catch (e) {
+  const err = e as Error;
+  error = `通信エラー: ${err.message}`;
+}
+---
+
+<Layout>
+  {error
+    ? <p style="color:red">{error}</p>
+    : (
+      <>
+        <h2>{data.title}</h2>
+        <div set:html={data.body}></div>
+      </>
+    )
+  }
+</Layout>
