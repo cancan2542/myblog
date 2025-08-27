@@ -1,8 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+export async function getStaticPaths() {
+  const API_URL = import.meta.env.MICROCMS_API_URL;
+  const API_KEY = import.meta.env.MICROCMS_API_KEY;
+
+  const res = await fetch(API_URL, {
+    headers: { 'X-API-KEY': API_KEY }
+  });
+  const data = await res.json();
+
+  return data.contents.map((item) => ({
+    params: { id: item.id }
+  }));
+}
+
 const { id } = Astro.params;
-const API_URL = `https://can2blog.microcms.io/api/v1/blogs/${id}`;
+const API_URL = `${import.meta.env.MICROCMS_API_URL}/${id}`;
 const API_KEY = import.meta.env.MICROCMS_API_KEY;
 
 let data: { title: string; body: string } = { title: '', body: '' };

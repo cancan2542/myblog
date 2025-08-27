@@ -8,7 +8,7 @@ type BlogItem = {
   body: string;
 };
 
-const API_URL = 'https://can2blog.microcms.io/api/v1/blogs';
+const API_URL = import.meta.env.MICROCMS_API_URL;
 const API_KEY = import.meta.env.MICROCMS_API_KEY;
 
 let data: { contents: BlogItem[] } = { contents: [] };
