@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  repository_dispatch:
 
 jobs:
   deploy:
@@ -22,6 +21,23 @@ jobs:
       - run: pnpm run build
         working-directory: app
       - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./app/dist
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install dependencies
+        if: github.event_name == 'push'
+        run: pnpm install
+        working-directory: app
+      - name: Build
+        if: github.event_name == 'push'
+        run: pnpm run build
+        working-directory: app
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./app/dist
