@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
@@ -15,8 +17,6 @@ jobs:
           version: 8
       - run: pnpm install
       - run: pnpm run build
-        env:
-          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
