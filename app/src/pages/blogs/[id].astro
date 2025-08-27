@@ -1,6 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+type BlogItem = {
+  id: string;
+  title: string;
+  body: string;
+};
+
 export async function getStaticPaths() {
   const API_URL = import.meta.env.MICROCMS_API_URL;
   const API_KEY = import.meta.env.MICROCMS_API_KEY;
@@ -8,7 +14,7 @@ export async function getStaticPaths() {
   const res = await fetch(API_URL, {
     headers: { 'X-API-KEY': API_KEY }
   });
-  const data = await res.json();
+  const data: { contents: BlogItem[] } = await res.json();
 
   return data.contents.map((item) => ({
     params: { id: item.id }

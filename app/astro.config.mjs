@@ -5,4 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   output: 'static',
   base: '/',
+  vite: {
+    envPrefix: 'MICROCMS_',
+  },
 });
