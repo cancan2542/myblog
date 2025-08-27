@@ -1,5 +1,4 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
 type BlogItem = {
@@ -30,22 +29,23 @@ try {
 ---
 
 <Layout>
-	<Welcome />
+  <div style="position: absolute; top: 0; left: 0; margin: 24px;">
+    <h2>記事一覧</h2>
+    {error
+      ? <p style="color:red">{error}</p>
+      : (
+        <ul>
+          {data.contents.map((item) => (
+            <li>
+              <a href={`/blogs/${item.id}`}><strong>{item.title}</strong></a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  {/* Astroのデフォルト画像・Welcomeコンポーネントは削除 */}
 </Layout>
-
-<h2>記事一覧</h2>
-{error
-  ? <p style="color:red">{error}</p>
-  : (
-    <ul>
-      {data.contents.map((item) => (
-        <li>
-          <a href={`/blogs/${item.id}`}><strong>{item.title}</strong></a>
-        </li>
-      ))}
-    </ul>
-  )
-}
     </ul>
   )
 }
