@@ -11,9 +11,6 @@ export async function getStaticPaths() {
   const API_URL = import.meta.env.MICROCMS_API_URL;
   const API_KEY = import.meta.env.MICROCMS_API_KEY;
 
-  console.log('getStaticPaths API_URL:', API_URL);
-  console.log('getStaticPaths API_KEY:', API_KEY);
-
   if (!API_URL) throw new Error('MICROCMS_API_URL is undefined');
   if (!API_KEY) throw new Error('MICROCMS_API_KEY is undefined');
 
@@ -30,9 +27,6 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const API_URL = `${import.meta.env.MICROCMS_API_URL}/${id}`;
 const API_KEY = import.meta.env.MICROCMS_API_KEY;
-
-console.log('detail API_URL:', API_URL);
-console.log('detail API_KEY:', API_KEY);
 
 let data: { title: string; body: string } = { title: '', body: '' };
 let error = '';
@@ -60,6 +54,12 @@ try {
     ? <p style="color:red">{error}</p>
     : (
       <>
+        <h2>{data.title}</h2>
+        <div set:html={data.body}></div>
+      </>
+    )
+  }
+</Layout>
         <h2>{data.title}</h2>
         <div set:html={data.body}></div>
       </>
