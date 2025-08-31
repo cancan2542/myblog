@@ -29,7 +29,7 @@ try {
 ---
 
 <Layout>
-  <div style="position: absolute; top: 0; left: 0; margin: 24px;">
+  <div style="margin: 2rem;">
     <h2>記事一覧</h2>
     {error
       ? <p style="color:red">{error}</p>
@@ -37,7 +37,7 @@ try {
         <ul>
           {data.contents.map((item) => (
             <li>
-              <a href={`/blogs/${item.id}`}><strong>{item.title}</strong></a>
+              <a href={`/${item.id}`}><strong>{item.title}</strong></a>
             </li>
           ))}
         </ul>
