@@ -1,0 +1,205 @@
+---
+import "../styles/global.css";
+import PlayerStatus from "../components/PlayerStatus.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A retro blog site built with Astro" />
+    <title>{title} | RETRO BLOG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">R RETRO BLOG</a>
+        <ul class="nav-links">
+          <li><a href="/">◉ Home</a></li>
+          <li><a href="/about">△ About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="header-status-bar">
+      <PlayerStatus />
+    </div>
+
+    <main class="main-content">
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>GAME OVER</p>
+        <p>&copy; 2026 RETRO BLOG. Continue? Y/N</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+  // ページビューをトラッキング
+  function trackPageView() {
+    const DAILY_VIEWS_KEY = 'player_daily_views';
+    const TOTAL_VIEWS_KEY = 'player_total_views';
+    const LAST_VISIT_DATE_KEY = 'player_last_visit_date';
+
+    // 各キーから現在の値を取得
+    let totalPageViews = parseInt(localStorage.getItem(TOTAL_VIEWS_KEY) || '0');
+    let dailyPageViews = parseInt(localStorage.getItem(DAILY_VIEWS_KEY) || '0');
+    let lastVisitDate = localStorage.getItem(LAST_VISIT_DATE_KEY) || new Date().toISOString().split('T')[0];
+
+    // 日付が変わった場合、dailyPageViews をリセット
+    const today = new Date().toISOString().split('T')[0];
+    if (lastVisitDate !== today) {
+      dailyPageViews = 0;
+      lastVisitDate = today;
+    }
+
+    // カウント増加
+    totalPageViews += 1;
+    dailyPageViews += 1;
+
+    // 各キーに保存
+    localStorage.setItem(TOTAL_VIEWS_KEY, totalPageViews.toString());
+    localStorage.setItem(DAILY_VIEWS_KEY, dailyPageViews.toString());
+    localStorage.setItem(LAST_VISIT_DATE_KEY, today);
+
+    // ページビューが変更されたことを通知
+    window.dispatchEvent(new CustomEvent('playerStatsUpdated'));
+  }
+
+  // ページロード時にトラッキング
+  trackPageView();
+</script>
+
+<style>
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    background: #e0e0e0;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .navbar {
+    background: #000;
+    color: #fff;
+    padding: 12px 0;
+    border-bottom: 3px solid #333;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+    letter-spacing: 2px;
+    background: #fff;
+    color: #000;
+    padding: 4px 8px;
+    border: 2px solid #fff;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+
+  .nav-links a:hover {
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+  }
+
+  .main-content {
+    min-height: calc(100vh - 300px);
+    padding: 2rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .footer {
+    background: #000;
+    color: #fff;
+    padding: 2rem 0;
+    border-top: 3px solid #333;
+    margin-top: 2rem;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+  }
+
+  .footer p {
+    margin: 8px 0;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .header-status-bar {
+    background: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #999;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .header-status-bar :global(.player-status) {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .logo {
+      font-size: 1rem;
+    }
+
+    .header-status-bar {
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,185 @@
+---
+interface Props {}
+---
+
+<div class="player-status" data-component="player-status">
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-label">TODAY</div>
+      <div class="stat-value" data-daily="0">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">TOTAL</div>
+      <div class="stat-value" data-total="0">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">LEVEL</div>
+      <div class="stat-value" data-level="0">0</div>
+    </div>
+  </div>
+
+  <div class="exp-section">
+    <div class="exp-label">EXP</div>
+    <div class="exp-bar">
+      <div class="exp-fill" data-exp-percent="0" style="width: 0%"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getPlayerStats } from '../utils/playerStats';
+
+  function updatePlayerStatus() {
+    const stats = getPlayerStats();
+    const dailyElement = document.querySelector('[data-daily]');
+    const totalElement = document.querySelector('[data-total]');
+    const levelElement = document.querySelector('[data-level]');
+    const expFill = document.querySelector('[data-exp-percent]');
+    
+    if (dailyElement) {
+      dailyElement.textContent = stats.dailyPageViews.toString();
+      dailyElement.setAttribute('data-daily', stats.dailyPageViews.toString());
+    }
+    
+    if (totalElement) {
+      totalElement.textContent = stats.totalPageViews.toString();
+      totalElement.setAttribute('data-total', stats.totalPageViews.toString());
+    }
+    
+    if (levelElement) {
+      levelElement.textContent = stats.level.toString();
+      levelElement.setAttribute('data-level', stats.level.toString());
+    }
+    
+    if (expFill) {
+      expFill.style.width = stats.expPercent + '%';
+      expFill.setAttribute('data-exp-percent', stats.expPercent.toString());
+    }
+  }
+
+  // 初期化
+  updatePlayerStatus();
+
+  // ページビュー変更時に更新
+  window.addEventListener('playerStatsUpdated', updatePlayerStatus);
+</script>
+
+<style>
+  .player-status {
+    background: #fff;
+    color: #333;
+    border: 2px solid #333;
+    padding: 8px 12px;
+    font-family: 'Courier New', monospace;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: fit-content;
+  }
+
+  .status-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .player-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .player-icon {
+    font-size: 1.2rem;
+  }
+
+  .player-label {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #666;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .player-name {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #333;
+  }
+
+  .stats {
+    display: flex;
+    gap: 8px;
+  }
+
+  .stat-box {
+    border: 1px solid #999;
+    padding: 3px 6px;
+    text-align: center;
+    background: #f5f5f5;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+    color: #666;
+    font-weight: bold;
+  }
+
+  .stat-value {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .exp-section {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .exp-label {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #666;
+    min-width: 30px;
+  }
+
+  .exp-bar {
+    width: 120px;
+    height: 12px;
+    border: 1px solid #999;
+    background: #f5f5f5;
+    position: relative;
+  }
+
+  .exp-fill {
+    height: 100%;
+    background: #0066cc;
+    transition: width 0.3s;
+  }
+
+  @media (max-width: 600px) {
+    .player-status {
+      width: 100%;
+    }
+
+    .status-header {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .exp-section {
+      width: 100%;
+      white-space: normal;
+    }
+
+    .exp-bar {
+      flex: 1;
+      min-width: 100px;
+    }
+  }
+</style>

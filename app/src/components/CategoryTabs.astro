@@ -1,0 +1,71 @@
+---
+interface Props {
+  categories?: string[];
+  activeCategory?: string;
+  onCategoryChange?: (category: string) => void;
+}
+
+const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 'All' } = Astro.props;
+---
+
+<div class="category-tabs">
+  {categories.map((category) => (
+    <button
+      class={`tab-button ${category === activeCategory ? 'active' : ''}`}
+      data-category={category}
+    >
+      {category}
+    </button>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.tab-button').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      document.querySelectorAll('.tab-button').forEach((btn) => {
+        btn.classList.remove('active');
+      });
+      (e.target as HTMLElement).classList.add('active');
+
+      const category = (e.target as HTMLElement).getAttribute('data-category') || 'All';
+      document.querySelectorAll('[data-category]').forEach((card) => {
+        if (category === 'All' || card.getAttribute('data-category') === category) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    padding: 8px 16px;
+    border: 2px solid #333;
+    background: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    font-family: 'Press Start 2P', monospace, sans-serif;
+  }
+
+  .tab-button:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+  }
+
+  .tab-button.active {
+    background: #333;
+    color: #fff;
+  }
+</style>

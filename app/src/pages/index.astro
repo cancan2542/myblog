@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PlayerStatus from '../components/PlayerStatus.astro';
+import CategoryTabs from '../components/CategoryTabs.astro';
+import BlogCard from '../components/BlogCard.astro';
+
+const title = "ホーム";
+
+// Sample blog posts
+const posts = [
+  {
+    id: 1,
+    title: "効率的なリモートワークの始め方",
+    description: "リモートワークを活用する上では、良い作業環境が基本です。ぜひこの記事を参考にして環境を整えるためのヒント...",
+    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=225&fit=crop",
+    date: "2026.01.10",
+    category: "Work",
+    tag: "WORK"
+  },
+  {
+    id: 2,
+    title: "モーニングルーティンで自分を変える",
+    description: "朝の過ごし方、一日の流れを変えることができます。毎朝同じルーティンを実施してみてはいかがでしょうか。朝の過ごし方を変えると人生が...",
+    image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=225&fit=crop",
+    date: "2026.01.05",
+    category: "Lifestyle",
+    tag: "LIFESTYLE"
+  },
+  {
+    id: 3,
+    title: "読書力からたろう5つの効果",
+    description: "読書は私たちの人生を豊かにします。もし今の人生を豊かにしたいのであれば、まず最初に読書について理解することが必要です。短期間での...",
+    image: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=225&fit=crop",
+    date: "2026.01.05",
+    category: "Learning",
+    tag: "LEARNING"
+  },
+  {
+    id: 4,
+    title: "JavaScriptの非同期処理を理解する",
+    description: "JavaScriptの非同期処理は初心者にとって難しい概念ですが、理解することで作成できるアプリケーションが広がります...",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=225&fit=crop",
+    date: "2026.01.03",
+    category: "Work",
+    tag: "WORK"
+  }
+];
+
+const categories = ['All', 'Work', 'Lifestyle', 'Learning'];
+---
+
+<Layout title={title}>
+  <!-- Press Start Section -->
+  <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: #fff; border: 3px solid #333; box-shadow: 8px 8px 0 rgba(0,0,0,0.2);">
+    <div style="font-family: 'Press Start 2P', monospace; font-size: 2rem; letter-spacing: 4px; margin-bottom: 1rem; color: #000;">
+      PRESS START
+    </div>
+    <p style="font-size: 1rem; color: #666; font-family: 'Courier New', monospace;">
+      古いゲーム機を現代によみがえらせるブログ
+    </p>
+  </div>
+
+  <!-- Category Tabs -->
+  <CategoryTabs categories={categories} />
+
+  <!-- Blog Posts Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+    {posts.map((post) => (
+      <div data-category={post.category}>
+        <a href={`/posts/${post.id}`} style="text-decoration: none;">
+          <BlogCard
+            tag={post.tag}
+            date={post.date}
+            title={post.title}
+            description={post.description}
+            image={post.image}
+            category={post.category}
+          />
+        </a>
+      </div>
+    ))}
+  </div>
+</Layout>

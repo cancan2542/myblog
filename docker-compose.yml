@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  astro-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: astro-blog-dev
+    ports:
+      - "3000:4321"
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: pnpm run dev -- --host 0.0.0.0
+    stdin_open: true
+    tty: true
+
+  # Optional: Production build test service
+  astro-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: astro-blog-prod
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    profiles:
+      - prod
