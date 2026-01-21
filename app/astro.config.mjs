@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   // Site URL for production
-  site: 'https://cancan2542.github.io/myblog',
+  site: 'https://myblog.cancan2542.github.io',
   
-  // Base path (only for production/GitHub Pages)
-  base: process.env.NODE_ENV === 'production' ? '/myblog' : '/',
+  // Base path (empty for root domain)
+  base: '/',
   
   // Output format: static for GitHub Pages
   output: 'static',
