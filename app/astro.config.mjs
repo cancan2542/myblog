@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   // Site URL for production
-  site: 'https://yourusername.github.io',
+  site: 'https://cancan2542.github.io/myblog',
   
   // Output format: static for GitHub Pages
   output: 'static',
