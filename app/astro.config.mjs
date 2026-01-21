@@ -5,8 +5,8 @@ export default defineConfig({
   // Site URL for production
   site: 'https://cancan2542.github.io/myblog',
   
-  // Base path for GitHub Pages (subdirectory deployment)
-  base: '/myblog',
+  // Base path (only for production/GitHub Pages)
+  base: process.env.NODE_ENV === 'production' ? '/myblog' : '/',
   
   // Output format: static for GitHub Pages
   output: 'static',
