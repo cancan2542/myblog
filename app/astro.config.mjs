@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://cancan2542.github.io',
   
   // Base path (root domain)
-  base: '/'},
+  base: '/',
   
   // Output format: static for GitHub Pages
   output: 'static',
