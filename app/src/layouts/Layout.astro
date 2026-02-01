@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import PlayerStatus from "../components/PlayerStatus.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 
 interface Props {
   title: string;
@@ -17,6 +18,7 @@ const { title } = Astro.props;
     <meta name="description" content="A retro blog site built with Astro" />
     <title>{title} | RETRO BLOG</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <GoogleAnalytics />
   </head>
   <body>
     <nav class="navbar">
