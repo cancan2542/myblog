@@ -5,8 +5,8 @@ export default defineConfig({
   // Site URL for production
   site: 'https://cancan2542.github.io',
   
-  // Base path for GitHub Pages repository
-  base: '/myblog/',
+  // Base path (root domain)
+  base: '/'},
   
   // Output format: static for GitHub Pages
   output: 'static',
