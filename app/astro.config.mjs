@@ -11,13 +11,13 @@ export default defineConfig({
   // Output format: static for GitHub Pages
   output: 'static',
 
-  // Build configuration
+  // Build configuration - directory format for clean URLs
   build: {
-    format: 'file',
+    format: 'directory',
   },
 
-  // Trailing slash configuration for GitHub Pages
-  trailingSlash: 'always',
+  // Trailing slash configuration - ignore to allow both with and without
+  trailingSlash: 'ignore',
 
   // Server configuration for development
   server: {

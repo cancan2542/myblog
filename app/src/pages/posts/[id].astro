@@ -3,47 +3,48 @@ import Layout from '../../layouts/Layout.astro';
 import ArticleHeader from '../../components/ArticleHeader.astro';
 import ArticleContent from '../../components/ArticleContent.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
-import { getAllPostIds, getPostById, getRelatedPosts } from '../../data/posts';
+import { getArticles, getArticle, type Article } from '../../lib/microcms';
 
 // 静的生成用のパスを生成
 export async function getStaticPaths() {
-  const postIds = getAllPostIds();
-  return postIds.map((id) => ({
-    params: { id },
+  const articles = await getArticles();
+  return articles.map((article) => ({
+    params: { id: article.id },
   }));
 }
 
 const { id } = Astro.params;
-const post = getPostById(id);
-const relatedPosts = getRelatedPosts(id);
+const article = await getArticle(id);
 
-if (!post) {
+if (!article) {
   return Astro.redirect('/404');
 }
+
+// 日付フォーマット
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.');
+};
 ---
 
-<Layout title={post.title}>
+<Layout title={article.title}>
   <div class="breadcrumb">
     <a href="/">Home</a>
     <span> / </span>
     <a href="/">Posts</a>
     <span> / </span>
-    <span>{post.title}</span>
+    <span>{article.title}</span>
   </div>
 
   <ArticleHeader 
-    title={post.title}
-    image={post.image}
-    date={post.date}
-    category={post.category}
-    tag={post.tag}
+    title={article.title}
+    image={article.image?.url || ''}
+    date={formatDate(article.publishedAt || article.createdAt)}
+    category={article.category?.name || ''}
+    tag={article.tag || ''}
   />
 
-  <ArticleContent content={post.content} />
-
-  {relatedPosts.length > 0 && (
-    <RelatedPosts posts={relatedPosts} />
-  )}
+  <ArticleContent content={article.content} />
 </Layout>
 
 <style>

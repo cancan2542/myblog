@@ -3,50 +3,32 @@ import Layout from '../layouts/Layout.astro';
 import PlayerStatus from '../components/PlayerStatus.astro';
 import CategoryTabs from '../components/CategoryTabs.astro';
 import BlogCard from '../components/BlogCard.astro';
+import { getArticles } from '../lib/microcms';
 
 const title = "ホーム";
 
-// Sample blog posts
-const posts = [
-  {
-    id: 1,
-    title: "効率的なリモートワークの始め方",
-    description: "リモートワークを活用する上では、良い作業環境が基本です。ぜひこの記事を参考にして環境を整えるためのヒント...",
-    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=225&fit=crop",
-    date: "2026.01.10",
-    category: "Work",
-    tag: "WORK"
-  },
-  {
-    id: 2,
-    title: "モーニングルーティンで自分を変える",
-    description: "朝の過ごし方、一日の流れを変えることができます。毎朝同じルーティンを実施してみてはいかがでしょうか。朝の過ごし方を変えると人生が...",
-    image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=225&fit=crop",
-    date: "2026.01.05",
-    category: "Lifestyle",
-    tag: "LIFESTYLE"
-  },
-  {
-    id: 3,
-    title: "読書力からたろう5つの効果",
-    description: "読書は私たちの人生を豊かにします。もし今の人生を豊かにしたいのであれば、まず最初に読書について理解することが必要です。短期間での...",
-    image: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=225&fit=crop",
-    date: "2026.01.05",
-    category: "Learning",
-    tag: "LEARNING"
-  },
-  {
-    id: 4,
-    title: "JavaScriptの非同期処理を理解する",
-    description: "JavaScriptの非同期処理は初心者にとって難しい概念ですが、理解することで作成できるアプリケーションが広がります...",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=225&fit=crop",
-    date: "2026.01.03",
-    category: "Work",
-    tag: "WORK"
-  }
-];
+// microCMSから記事を取得
+const articles = await getArticles();
 
-const categories = ['All', 'Work', 'Lifestyle', 'Learning'];
+// 日付フォーマット
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.');
+};
+
+// 記事データを変換
+const posts = articles.map((article) => ({
+  id: article.id,
+  title: article.title,
+  description: article.description || '',
+  image: article.image?.url || 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=225&fit=crop',
+  date: formatDate(article.publishedAt || article.createdAt),
+  category: article.category?.name || 'Uncategorized',
+  tag: article.tag || article.category?.name?.toUpperCase() || 'GENERAL',
+}));
+
+// カテゴリ一覧を取得
+const categories = ['All', ...new Set(posts.map(p => p.category))];
 ---
 
 <Layout title={title}>
@@ -65,19 +47,27 @@ const categories = ['All', 'Work', 'Lifestyle', 'Learning'];
 
   <!-- Blog Posts Grid -->
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
-    {posts.map((post) => (
-      <div data-category={post.category}>
-        <a href={`/posts/${post.id}`} style="text-decoration: none;">
-          <BlogCard
-            tag={post.tag}
-            date={post.date}
-            title={post.title}
-            description={post.description}
-            image={post.image}
-            category={post.category}
-          />
-        </a>
+    {posts.length > 0 ? (
+      posts.map((post) => (
+        <div data-category={post.category}>
+          <a href={`/posts/${post.id}`} style="text-decoration: none;">
+            <BlogCard
+              tag={post.tag}
+              date={post.date}
+              title={post.title}
+              description={post.description}
+              image={post.image}
+              category={post.category}
+            />
+          </a>
+        </div>
+      ))
+    ) : (
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: #fff; border: 2px solid #333;">
+        <p style="font-family: 'Courier New', monospace; color: #666;">
+          まだ記事がありません。microCMSで記事を作成してください。
+        </p>
       </div>
-    ))}
+    )}
   </div>
 </Layout>

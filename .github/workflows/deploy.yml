@@ -45,6 +45,8 @@ jobs:
           echo "PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" >> .env
           echo "PUBLIC_FIREBASE_APP_ID=${{ secrets.PUBLIC_FIREBASE_APP_ID }}" >> .env
           echo "PUBLIC_GA_MEASUREMENT_ID=${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}" >> .env
+          echo "MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }}" >> .env
+          echo "MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }}" >> .env
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile

@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "astro": "^4.13.0",
-    "firebase": "^10.7.1"
+    "firebase": "^10.7.1",
+    "microcms-js-sdk": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
