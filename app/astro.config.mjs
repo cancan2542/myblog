@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   // Site URL for production
-  site: 'https://cancan2542.github.io',
+  site: 'https://canpark.blog',
   
   // Base path (root domain)
   base: '/',
