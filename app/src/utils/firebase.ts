@@ -12,13 +12,6 @@ const firebaseConfig = {
   appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
 };
 
-// デバッグ: 設定値を確認
-console.log('Firebase config check:', {
-  hasApiKey: !!firebaseConfig.apiKey,
-  hasDatabaseURL: !!firebaseConfig.databaseURL,
-  databaseURL: firebaseConfig.databaseURL,
-});
-
 // Firebaseアプリを初期化（既存のアプリがあれば再利用）
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
@@ -60,28 +53,20 @@ export function calculateLevel(pageViews: number): { level: number; expPercent: 
 
 // 訪問者統計を取得
 export async function getVisitorStats(): Promise<VisitorStats> {
-  console.log('getVisitorStats called');
   try {
     const today = getTodayDate();
-    console.log('Today:', today);
     
     // 通算ページビューを取得
     const totalRef = ref(database, 'stats/totalPageViews');
-    console.log('Fetching total page views...');
     const totalSnapshot = await get(totalRef);
-    console.log('Total snapshot exists:', totalSnapshot.exists(), 'value:', totalSnapshot.val());
     const totalPageViews = totalSnapshot.exists() ? totalSnapshot.val() : 0;
     
     // 今日のページビューを取得
     const dailyRef = ref(database, `stats/daily/${today}`);
-    console.log('Fetching daily page views...');
     const dailySnapshot = await get(dailyRef);
-    console.log('Daily snapshot exists:', dailySnapshot.exists(), 'value:', dailySnapshot.val());
     const dailyPageViews = dailySnapshot.exists() ? dailySnapshot.val() : 0;
     
     const { level, expPercent } = calculateLevel(totalPageViews);
-    
-    console.log('Returning stats:', { totalPageViews, dailyPageViews, level, expPercent });
     return {
       totalPageViews,
       dailyPageViews,
