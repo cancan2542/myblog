@@ -98,6 +98,8 @@ export function calculateLevel(pageViews: number): { level: number; expPercent: 
 
 export function resetStats(): void {
   if (typeof window !== 'undefined') {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(DAILY_VIEWS_KEY);
+    localStorage.removeItem(TOTAL_VIEWS_KEY);
+    localStorage.removeItem(LAST_VISIT_DATE_KEY);
   }
 }

@@ -52,7 +52,7 @@ interface Props {}
     }
     
     if (expFill) {
-      expFill.style.width = stats.expPercent + '%';
+      (expFill as HTMLElement).style.width = stats.expPercent + '%';
       expFill.setAttribute('data-exp-percent', stats.expPercent.toString());
     }
   }
