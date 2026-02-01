@@ -29,8 +29,7 @@ interface Props {}
 <script>
   import { getVisitorStats, incrementPageView } from '../utils/firebase';
 
-  async function updatePlayerStatus() {
-    const stats = await getVisitorStats();
+  function updateDisplay(stats: { dailyPageViews: number; totalPageViews: number; level: number; expPercent: number }) {
     const dailyElement = document.querySelector('[data-daily]');
     const totalElement = document.querySelector('[data-total]');
     const levelElement = document.querySelector('[data-level]');
@@ -59,20 +58,27 @@ interface Props {}
 
   // ページビューをインクリメントして表示を更新
   async function initPlayerStatus() {
-    // セッションごとに1回だけカウント（リロード対策）
-    const sessionKey = 'pageViewCounted_' + window.location.pathname;
-    if (!sessionStorage.getItem(sessionKey)) {
-      await incrementPageView();
-      sessionStorage.setItem(sessionKey, 'true');
+    try {
+      // セッションごとに1回だけカウント（リロード対策）
+      const sessionKey = 'pageViewCounted_' + window.location.pathname;
+      
+      if (!sessionStorage.getItem(sessionKey)) {
+        // 初回訪問: カウントをインクリメントして結果を表示
+        const stats = await incrementPageView();
+        sessionStorage.setItem(sessionKey, 'true');
+        updateDisplay(stats);
+      } else {
+        // リロード: 最新のカウントを取得して表示
+        const stats = await getVisitorStats();
+        updateDisplay(stats);
+      }
+    } catch (error) {
+      console.error('PlayerStatus init error:', error);
     }
-    await updatePlayerStatus();
   }
 
   // 初期化
   initPlayerStatus();
-
-  // ページビュー変更時に更新
-  window.addEventListener('playerStatsUpdated', updatePlayerStatus);
 </script>
 
 <style>
