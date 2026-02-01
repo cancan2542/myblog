@@ -59,9 +59,14 @@ interface Props {}
   // ページビューをインクリメントして表示を更新
   async function initPlayerStatus() {
     try {
+      // ローカル開発環境ではカウントしない
+      const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      if (isLocal) {
+        updateDisplay({ dailyPageViews: 0, totalPageViews: 0, level: 0, expPercent: 0 });
+        return;
+      }
       // セッションごとに1回だけカウント（リロード対策）
       const sessionKey = 'pageViewCounted_' + window.location.pathname;
-      
       if (!sessionStorage.getItem(sessionKey)) {
         // 初回訪問: カウントをインクリメントして結果を表示
         const stats = await incrementPageView();

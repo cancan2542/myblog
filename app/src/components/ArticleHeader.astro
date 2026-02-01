@@ -11,11 +11,12 @@ const { title, image, date, category, tag } = Astro.props;
 ---
 
 <div class="article-header">
-  <div class="article-image-wrapper">
-    <img src={image} alt={title} class="article-image" />
-    <div class="article-tag">{tag}</div>
-  </div>
-  
+  {image && image !== '' && (
+    <div class="article-image-wrapper">
+      <img src={image} alt={title} class="article-image" />
+      <div class="article-tag">{tag}</div>
+    </div>
+  )}
   <div class="article-meta-box">
     <div class="article-title">{title}</div>
     

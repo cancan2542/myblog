@@ -36,13 +36,20 @@ const formatDate = (dateString: string) => {
     <span>{article.title}</span>
   </div>
 
+
   <ArticleHeader 
     title={article.title}
     image={article.image?.url || ''}
-    date={formatDate(article.publishedAt || article.createdAt)}
+    date={`作成日: ${formatDate(article.createdAt)}`}
     category={article.category?.name || ''}
     tag={article.tag || ''}
   />
+
+  {article.updatedAt && article.updatedAt !== article.createdAt && (
+    <div style="margin-bottom:1.5rem; color:#666; font-size:0.95rem; font-family:'Courier New',monospace;">
+      最終更新日: {formatDate(article.updatedAt)}
+    </div>
+  )}
 
   <ArticleContent content={article.content} />
 </Layout>
