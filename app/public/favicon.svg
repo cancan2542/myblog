@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- 左耳 -->
+  <circle cx="22" cy="22" r="18" fill="#8B4513"/>
+  <circle cx="22" cy="22" r="10" fill="#D2691E"/>
+  <!-- 右耳 -->
+  <circle cx="78" cy="22" r="18" fill="#8B4513"/>
+  <circle cx="78" cy="22" r="10" fill="#D2691E"/>
+  <!-- 顔 -->
+  <circle cx="50" cy="55" r="42" fill="#8B4513"/>
+  <!-- 顔の内側 -->
+  <ellipse cx="50" cy="62" rx="28" ry="25" fill="#D2691E"/>
+  <!-- 左目 -->
+  <circle cx="35" cy="48" r="6" fill="#000"/>
+  <circle cx="37" cy="46" r="2" fill="#fff"/>
+  <!-- 右目 -->
+  <circle cx="65" cy="48" r="6" fill="#000"/>
+  <circle cx="67" cy="46" r="2" fill="#fff"/>
+  <!-- 鼻 -->
+  <ellipse cx="50" cy="65" rx="8" ry="6" fill="#000"/>
+  <ellipse cx="50" cy="64" rx="3" ry="2" fill="#666"/>
+  <!-- 口 -->
+  <path d="M42 75 Q50 82 58 75" stroke="#000" stroke-width="2" fill="none"/>
+</svg>
