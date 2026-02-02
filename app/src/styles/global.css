@@ -1,3 +1,31 @@
+:root {
+  /* Colors */
+  --color-border: #333;
+  --color-background: #fff;
+  --color-background-dark: #e0e0e0;
+  --color-text: #333;
+  --color-text-muted: #666;
+  --color-link: #0066cc;
+  --color-highlight: #ffff00;
+  --color-terminal-bg: #000;
+  --color-terminal-text: #0f0;
+
+  /* Shadows */
+  --shadow-lg: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  --shadow-xl: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  --shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
+
+  /* Typography */
+  --font-mono: 'Courier New', Courier, monospace;
+  --font-retro: 'Press Start 2P', monospace;
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Borders */
+  --border-thick: 3px solid var(--color-border);
+  --border-medium: 2px solid var(--color-border);
+  --border-thin: 1px solid #999;
+}
+
 * {
   margin: 0;
   padding: 0;
