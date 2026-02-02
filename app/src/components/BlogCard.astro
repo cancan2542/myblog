@@ -28,9 +28,9 @@ const { tag, date, title, description, image, category } = Astro.props;
 
 <style>
   .blog-card {
-    border: 2px solid #333;
-    background: #fff;
-    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    border: var(--border-medium);
+    background: var(--color-background);
+    box-shadow: var(--shadow-lg);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
   }
@@ -61,8 +61,8 @@ const { tag, date, title, description, image, category } = Astro.props;
     position: absolute;
     top: 8px;
     left: 8px;
-    background: #333;
-    color: #fff;
+    background: var(--color-border);
+    color: var(--color-background);
     padding: 2px 6px;
     font-size: 0.7rem;
     font-weight: bold;
@@ -81,15 +81,15 @@ const { tag, date, title, description, image, category } = Astro.props;
   }
 
   .card-category {
-    background: #e0e0e0;
-    border: 1px solid #999;
+    background: var(--color-background-dark);
+    border: var(--border-thin);
     padding: 2px 6px;
     font-weight: bold;
   }
 
   .card-date {
-    color: #666;
-    font-family: 'Courier New', monospace;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
   }
 
   .card-content h3 {
@@ -103,7 +103,7 @@ const { tag, date, title, description, image, category } = Astro.props;
     margin: 6px 0;
     font-size: 0.8rem;
     line-height: 1.4;
-    color: #333;
+    color: var(--color-text);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

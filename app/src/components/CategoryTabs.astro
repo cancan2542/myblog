@@ -20,23 +20,8 @@ const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 
 </div>
 
 <script>
-  document.querySelectorAll('.tab-button').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      document.querySelectorAll('.tab-button').forEach((btn) => {
-        btn.classList.remove('active');
-      });
-      (e.target as HTMLElement).classList.add('active');
-
-      const category = (e.target as HTMLElement).getAttribute('data-category') || 'All';
-      document.querySelectorAll('[data-category]').forEach((card) => {
-        if (category === 'All' || card.getAttribute('data-category') === category) {
-          (card as HTMLElement).style.display = 'block';
-        } else {
-          (card as HTMLElement).style.display = 'none';
-        }
-      });
-    });
-  });
+  import { initCategoryFilter } from '../utils/categoryFilter';
+  initCategoryFilter();
 </script>
 
 <style>
@@ -50,13 +35,13 @@ const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 
 
   .tab-button {
     padding: 8px 16px;
-    border: 2px solid #333;
-    background: #fff;
+    border: var(--border-medium);
+    background: var(--color-background);
     cursor: pointer;
     font-weight: bold;
     font-size: 0.9rem;
     transition: all 0.2s;
-    font-family: 'Press Start 2P', monospace, sans-serif;
+    font-family: var(--font-retro);
   }
 
   .tab-button:hover {
@@ -65,7 +50,7 @@ const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 
   }
 
   .tab-button.active {
-    background: #333;
-    color: #fff;
+    background: var(--color-border);
+    color: var(--color-background);
   }
 </style>
