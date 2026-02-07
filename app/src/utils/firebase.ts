@@ -88,44 +88,46 @@ export async function getVisitorStats(): Promise<VisitorStats> {
 
 // ページビューをインクリメント
 export async function incrementPageView(): Promise<VisitorStats> {
+  const today = getTodayDate();
+  let newTotalPageViews = 0;
+  let newDailyPageViews = 0;
+
   try {
-    const today = getTodayDate();
-    
     // 通算ページビューをインクリメント
     const totalRef = ref(database, 'stats/totalPageViews');
-    let newTotalPageViews = 0;
-    
+
     await runTransaction(totalRef, (currentValue) => {
       newTotalPageViews = (currentValue || 0) + 1;
       return newTotalPageViews;
     });
-    
+  } catch (error) {
+    console.error('Firebase total increment error:', error);
+    // 通算カウント失敗時は日別カウントも行わずに既存の統計を返す
+    return getVisitorStats();
+  }
+
+  try {
     // 今日のページビューをインクリメント
     const dailyRef = ref(database, `stats/daily/${today}`);
-    let newDailyPageViews = 0;
-    
+
     await runTransaction(dailyRef, (currentValue) => {
       newDailyPageViews = (currentValue || 0) + 1;
       return newDailyPageViews;
     });
-    
-    const { level, expPercent } = calculateLevel(newTotalPageViews);
-    
-    return {
-      totalPageViews: newTotalPageViews,
-      dailyPageViews: newDailyPageViews,
-      lastVisitDate: today,
-      level,
-      expPercent,
-    };
   } catch (error) {
-    console.error('Firebase increment error:', error);
-    return {
-      totalPageViews: 0,
-      dailyPageViews: 0,
-      lastVisitDate: '',
-      level: 0,
-      expPercent: 0,
-    };
+    console.error('Firebase daily increment error:', error);
+    // 日別カウント失敗時も通算は成功しているので、日別は既存値を使用
+    const existingStats = await getVisitorStats();
+    newDailyPageViews = existingStats.dailyPageViews;
   }
+
+  const { level, expPercent } = calculateLevel(newTotalPageViews);
+
+  return {
+    totalPageViews: newTotalPageViews,
+    dailyPageViews: newDailyPageViews,
+    lastVisitDate: today,
+    level,
+    expPercent,
+  };
 }

@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "astro": "^4.13.0",
@@ -15,7 +17,11 @@
     "microcms-js-sdk": "^3.1.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
     "@types/node": "^20.10.6",
-    "typescript": "^5.3.3"
+    "happy-dom": "^20.5.0",
+    "jsdom": "^28.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18"
   }
 }

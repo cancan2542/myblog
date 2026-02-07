@@ -8,9 +8,11 @@ interface Props {
 const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 'All' } = Astro.props;
 ---
 
-<div class="category-tabs">
+<div class="category-tabs" role="tablist" aria-label="記事カテゴリフィルター">
   {categories.map((category) => (
     <button
+      role="tab"
+      aria-selected={category === activeCategory}
       class={`tab-button ${category === activeCategory ? 'active' : ''}`}
       data-category={category}
     >
