@@ -1,6 +1,10 @@
 // Firebase設定と初期化
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, get, runTransaction } from 'firebase/database';
+import { calculateLevel } from './levelCalculator';
+
+// レベル計算を再エクスポート（後方互換性のため）
+export { calculateLevel } from './levelCalculator';
 
 const firebaseConfig = {
   apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
@@ -28,27 +32,6 @@ export interface VisitorStats {
   lastVisitDate: string;
   level: number;
   expPercent: number;
-}
-
-// レベル計算（既存のロジックを継承）
-export function calculateLevel(pageViews: number): { level: number; expPercent: number } {
-  let level = 0;
-  let currentExp = pageViews;
-
-  while (true) {
-    const nextLevelExp = (level + 1) * 10;
-    if (currentExp >= nextLevelExp) {
-      currentExp -= nextLevelExp;
-      level += 1;
-    } else {
-      break;
-    }
-  }
-
-  const nextLevelExp = (level + 1) * 10;
-  const expPercent = Math.round((currentExp / nextLevelExp) * 100);
-
-  return { level, expPercent };
 }
 
 // 訪問者統計を取得

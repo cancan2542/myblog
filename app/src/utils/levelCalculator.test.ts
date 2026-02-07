@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateLevel } from './firebase';
+import { calculateLevel } from './levelCalculator';
 
 describe('calculateLevel', () => {
   it('should return level 0 for 0 page views', () => {
