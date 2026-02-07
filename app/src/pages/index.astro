@@ -110,17 +110,36 @@ const categories = ['All', ...new Set(posts.map(p => p.category))];
     margin: 0;
   }
 
-  @media (max-width: 768px) {
+  /* Tablet: 768px - 1023px */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  /* Mobile: 〜767px */
+  @media (max-width: 767px) {
+    .hero {
+      padding: 1rem 0.5rem;
+    }
+
     .hero-title {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     .hero-description {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .posts-grid {
       grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .empty-state {
+      padding: 3rem 1.5rem;
     }
   }
 </style>
