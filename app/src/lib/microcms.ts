@@ -69,12 +69,17 @@ export async function getArticle(id: string): Promise<Article | null> {
 
 // カテゴリ別の記事一覧を取得
 export async function getArticlesByCategory(categoryId: string, limit: number = 100): Promise<Article[]> {
-  const response = await client.get<ArticleListResponse>({
-    endpoint: 'articles',
-    queries: {
-      limit,
-      filters: `category[equals]${categoryId}`,
-    },
-  });
-  return response.contents;
+  try {
+    const response = await client.get<ArticleListResponse>({
+      endpoint: 'articles',
+      queries: {
+        limit,
+        filters: `category[equals]${categoryId}`,
+      },
+    });
+    return response.contents;
+  } catch (error) {
+    console.error('Failed to fetch articles by category:', error);
+    return [];
+  }
 }

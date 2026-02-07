@@ -1,25 +1,25 @@
 ---
 ---
 
-<div class="player-status" data-component="player-status">
-  <div class="stats">
+<div class="player-status" data-component="player-status" role="region" aria-label="訪問者統計">
+  <div class="stats" role="group" aria-label="ページビュー統計">
     <div class="stat-box">
-      <div class="stat-label">TODAY</div>
-      <div class="stat-value" data-daily="0">0</div>
+      <div class="stat-label" id="label-daily">TODAY</div>
+      <div class="stat-value" data-daily="0" aria-labelledby="label-daily" aria-live="polite">0</div>
     </div>
     <div class="stat-box">
-      <div class="stat-label">TOTAL</div>
-      <div class="stat-value" data-total="0">0</div>
+      <div class="stat-label" id="label-total">TOTAL</div>
+      <div class="stat-value" data-total="0" aria-labelledby="label-total" aria-live="polite">0</div>
     </div>
     <div class="stat-box">
-      <div class="stat-label">LEVEL</div>
-      <div class="stat-value" data-level="0">0</div>
+      <div class="stat-label" id="label-level">LEVEL</div>
+      <div class="stat-value" data-level="0" aria-labelledby="label-level" aria-live="polite">0</div>
     </div>
   </div>
 
   <div class="exp-section">
-    <div class="exp-label">EXP</div>
-    <div class="exp-bar">
+    <div class="exp-label" id="label-exp">EXP</div>
+    <div class="exp-bar" role="progressbar" aria-labelledby="label-exp" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
       <div class="exp-fill" data-exp-percent="0" style="width: 0%"></div>
     </div>
   </div>

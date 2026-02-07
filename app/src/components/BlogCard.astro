@@ -11,20 +11,20 @@ interface Props {
 const { tag, date, title, description, image, category } = Astro.props;
 ---
 
-<div class="blog-card">
+<article class="blog-card" aria-label={title}>
   <div class="card-image">
     <img src={image} alt={title} />
-    <div class="card-tag">{tag}</div>
+    <div class="card-tag" aria-hidden="true">{tag}</div>
   </div>
   <div class="card-content">
     <div class="card-meta">
       <span class="card-category">{category}</span>
-      <span class="card-date">{date}</span>
+      <time class="card-date" datetime={date}>{date}</time>
     </div>
     <h3>{title}</h3>
     <p>{description}</p>
   </div>
-</div>
+</article>
 
 <style>
   .blog-card {
