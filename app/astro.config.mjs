@@ -4,9 +4,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   // Site URL for production
   site: 'https://canpark.blog',
-  
-  // Base path (root domain)
-  base: '/',
+
+  // Base path (root domain, or dynamic for PR previews)
+  base: process.env.PREVIEW_BASE_PATH || '/',
   
   // Output format: static for GitHub Pages
   output: 'static',
