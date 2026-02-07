@@ -1,11 +1,11 @@
 {
-  "name": "RETRO BLOG",
-  "short_name": "RETRO BLOG",
+  "name": "CanPark",
+  "short_name": "CanPark",
   "icons": [
     {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
       "src": "/apple-touch-icon.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#e0e0e0",
+  "theme_color": "#E91E63",
+  "background_color": "#F8F9FA",
   "display": "standalone"
 }
