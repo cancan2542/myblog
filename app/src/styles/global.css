@@ -1,29 +1,37 @@
 :root {
-  /* Colors */
-  --color-border: #333;
-  --color-background: #fff;
-  --color-background-dark: #e0e0e0;
-  --color-text: #333;
-  --color-text-muted: #666;
-  --color-link: #0066cc;
-  --color-highlight: #ffff00;
-  --color-terminal-bg: #000;
-  --color-terminal-text: #0f0;
+  /* Colors - CanPark City Style */
+  --color-primary: #2C3E50;
+  --color-background: #F8F9FA;
+  --color-background-dark: #E9ECEF;
+  --color-accent: #3498DB;
+  --color-secondary: #95A5A6;
+  --color-text: #2C3E50;
+  --color-text-muted: #6C757D;
+  --color-link: #3498DB;
+  --color-border: #DEE2E6;
 
-  /* Shadows */
-  --shadow-lg: 4px 4px 0 rgba(0, 0, 0, 0.2);
-  --shadow-xl: 8px 8px 0 rgba(0, 0, 0, 0.2);
-  --shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Legacy aliases for compatibility */
+  --color-highlight: #3498DB;
+  --color-terminal-bg: #2C3E50;
+  --color-terminal-text: #F8F9FA;
+
+  /* Shadows - Softer, modern style */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 
   /* Typography */
-  --font-mono: 'Courier New', Courier, monospace;
-  --font-retro: 'Press Start 2P', monospace;
-  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+  --font-display: 'Inter', 'Noto Sans JP', sans-serif;
 
-  /* Borders */
-  --border-thick: 3px solid var(--color-border);
-  --border-medium: 2px solid var(--color-border);
-  --border-thin: 1px solid #999;
+  /* Borders - Cleaner style */
+  --border-thick: 2px solid var(--color-primary);
+  --border-medium: 1px solid var(--color-border);
+  --border-thin: 1px solid var(--color-border);
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
 }
 
 * {
@@ -37,10 +45,10 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: #e0e0e0;
-  color: #333;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -51,11 +59,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2rem;
-  border: 3px solid #333;
-  padding: 1rem;
-  background: #fff;
-  display: inline-block;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 p {
@@ -63,42 +68,39 @@ p {
 }
 
 a {
-  color: #0066cc;
+  color: var(--color-link);
   text-decoration: none;
-  border-bottom: 2px dotted currentColor;
+  transition: color 0.2s;
 }
 
 a:hover {
-  background: #ffff00;
-  color: #000;
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 code {
-  background: #f5f5f5;
+  background: var(--color-background-dark);
   padding: 0.2em 0.4em;
-  border: 1px solid #999;
-  border-radius: 2px;
-  font-family: 'Courier New', Courier, monospace;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
 }
 
 pre {
-  background: #000;
-  color: #0f0;
-  padding: 1rem;
-  border: 3px solid #333;
-  border-radius: 0;
+  background: var(--color-terminal-bg);
+  color: var(--color-terminal-text);
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
   overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
-  line-height: 1.4;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
 }
 
 pre code {
   padding: 0;
   background: none;
-  border: none;
-  color: #0f0;
+  color: inherit;
 }
 
 ul, ol {
@@ -115,7 +117,8 @@ button {
   cursor: pointer;
 }
 
-.press-start-text {
-  font-family: 'Press Start 2P', monospace, sans-serif;
-  letter-spacing: 2px;
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }

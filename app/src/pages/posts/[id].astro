@@ -2,8 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ArticleHeader from '../../components/ArticleHeader.astro';
 import ArticleContent from '../../components/ArticleContent.astro';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import { getArticles, getArticle, type Article } from '../../lib/microcms';
+import { getArticles, getArticle } from '../../lib/microcms';
 import { formatDate } from '../../utils/dateFormatter';
 
 // 静的生成用のパスを生成
@@ -23,26 +22,29 @@ if (!article) {
 ---
 
 <Layout title={article.title}>
-  <div class="breadcrumb">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
     <a href="/">Home</a>
-    <span> / </span>
+    <span class="separator">/</span>
     <a href="/">Posts</a>
-    <span> / </span>
-    <span>{article.title}</span>
-  </div>
+    <span class="separator">/</span>
+    <span class="current">{article.title}</span>
+  </nav>
 
-
-  <ArticleHeader 
+  <ArticleHeader
     title={article.title}
     image={article.image?.url || ''}
-    date={`作成日: ${formatDate(article.createdAt)}`}
+    date={formatDate(article.createdAt)}
     category={article.category?.name || ''}
-    tag={article.tag || ''}
+    tag={article.tag || article.category?.name?.toUpperCase() || 'GENERAL'}
   />
 
   {article.updatedAt && article.updatedAt !== article.createdAt && (
-    <div style="margin-bottom:1.5rem; color:#666; font-size:0.95rem; font-family:'Courier New',monospace;">
-      最終更新日: {formatDate(article.updatedAt)}
+    <div class="updated-date">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span>最終更新日: {formatDate(article.updatedAt)}</span>
     </div>
   )}
 
@@ -51,24 +53,53 @@ if (!article) {
 
 <style>
   .breadcrumb {
-    margin: 1.5rem 0;
-    font-size: 0.9rem;
-    color: #666;
-    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.85rem;
   }
 
   .breadcrumb a {
-    color: #0066cc;
+    color: var(--color-accent);
     text-decoration: none;
-    border-bottom: 2px dotted currentColor;
+    transition: opacity 0.2s;
   }
 
   .breadcrumb a:hover {
-    background: #ffff00;
-    color: #000;
+    opacity: 0.7;
   }
 
-  .breadcrumb span {
-    margin: 0 0.5rem;
+  .breadcrumb .separator {
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb .current {
+    color: var(--color-text-muted);
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .updated-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-background-dark);
+    border-radius: var(--border-radius);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  .updated-date svg {
+    flex-shrink: 0;
   }
 </style>
