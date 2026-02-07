@@ -5,8 +5,8 @@ export default defineConfig({
   // Site URL for production
   site: 'https://canpark.blog',
 
-  // Base path (root domain, or dynamic for PR previews)
-  base: process.env.PREVIEW_BASE_PATH || '/',
+  // Base path (root domain)
+  base: '/',
   
   // Output format: static for GitHub Pages
   output: 'static',
