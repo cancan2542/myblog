@@ -5,7 +5,7 @@ interface Props {
   onCategoryChange?: (category: string) => void;
 }
 
-const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 'All' } = Astro.props;
+const { categories = ['All', 'Spots', 'Gear', 'Tips', 'Review'], activeCategory = 'All' } = Astro.props;
 ---
 
 <div class="category-tabs" role="tablist" aria-label="記事カテゴリフィルター">
@@ -30,29 +30,32 @@ const { categories = ['All', 'Work', 'Lifestyle', 'Learning'], activeCategory = 
   .category-tabs {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin: 2rem 0;
+    gap: 8px;
+    margin: 1.5rem 0;
     flex-wrap: wrap;
   }
 
   .tab-button {
-    padding: 8px 16px;
-    border: var(--border-medium);
-    background: var(--color-background);
+    padding: 8px 20px;
+    border: none;
+    background: #fff;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 0.9rem;
     transition: all 0.2s;
-    font-family: var(--font-retro);
+    font-family: var(--font-sans);
+    border-radius: 20px;
+    color: var(--color-text-muted);
+    box-shadow: var(--shadow-sm);
   }
 
   .tab-button:hover {
-    background: #f0f0f0;
-    transform: scale(1.05);
+    background: var(--color-background-dark);
+    color: var(--color-primary);
   }
 
   .tab-button.active {
-    background: var(--color-border);
-    color: var(--color-background);
+    background: var(--color-primary);
+    color: #fff;
   }
 </style>

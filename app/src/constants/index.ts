@@ -4,11 +4,11 @@
 
 // 画像
 export const DEFAULT_ARTICLE_IMAGE =
-  'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=225&fit=crop';
+  'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=225&fit=crop';
 
 // カテゴリー
-export const DEFAULT_CATEGORIES = ['All', 'Work', 'Lifestyle', 'Learning'];
+export const DEFAULT_CATEGORIES = ['All', 'Spots', 'Gear', 'Tips', 'Review'];
 
 // サイト情報
-export const SITE_NAME = 'PRESS START';
-export const SITE_DESCRIPTION = '古いゲーム機を現代によみがえらせるブログ';
+export const SITE_NAME = 'CanPark';
+export const SITE_DESCRIPTION = 'スポーツカーでもできる、車中泊のススメ。';

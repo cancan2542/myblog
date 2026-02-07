@@ -1,20 +1,64 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const title = "プロフィール";
+const title = "About";
 ---
 
 <Layout title={title}>
-<h1>プロフィール</h1>
-
-<p>ようこそ！このページはプロフィール情報を掲載します。</p>
-
-<h2>自己紹介</h2>
-<p>ここに自分自身の紹介を追加してください。</p>
-
-<h2>スキル</h2>
-<ul>
-  <li>Astro</li>
-  <li>TypeScript</li>
-  <li>React</li>
-</ul>
+  <div class="coming-soon">
+    <div class="icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 6v6l4 2"></path>
+      </svg>
+    </div>
+    <h1>Coming Soon</h1>
+    <p>このページは現在準備中です</p>
+    <a href="/" class="back-link">ホームに戻る</a>
+  </div>
 </Layout>
+
+<style>
+  .coming-soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .icon {
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+    font-family: var(--font-display);
+  }
+
+  p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0 0 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .back-link:hover {
+    opacity: 0.9;
+  }
+</style>

@@ -28,16 +28,16 @@ const { tag, date, title, description, image, category } = Astro.props;
 
 <style>
   .blog-card {
-    border: var(--border-medium);
-    background: var(--color-background);
-    box-shadow: var(--shadow-lg);
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .blog-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
   }
 
   .card-image {
@@ -45,7 +45,7 @@ const { tag, date, title, description, image, category } = Astro.props;
     width: 100%;
     padding-bottom: 56.25%;
     overflow: hidden;
-    background: #f0f0f0;
+    background: var(--color-background-dark);
   }
 
   .card-image img {
@@ -55,55 +55,65 @@ const { tag, date, title, description, image, category } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .blog-card:hover .card-image img {
+    transform: scale(1.05);
   }
 
   .card-tag {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    background: var(--color-border);
-    color: var(--color-background);
-    padding: 2px 6px;
+    top: 12px;
+    left: 12px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4px 10px;
     font-size: 0.7rem;
-    font-weight: bold;
-    border: 1px solid #000;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
   }
 
   .card-content {
-    padding: 12px;
+    padding: 16px;
   }
 
   .card-meta {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 0.8rem;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .card-category {
-    background: var(--color-background-dark);
-    border: var(--border-thin);
-    padding: 2px 6px;
-    font-weight: bold;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 3px 8px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    border-radius: var(--border-radius-sm);
   }
 
   .card-date {
     color: var(--color-text-muted);
-    font-family: var(--font-mono);
+    font-size: 0.8rem;
   }
 
   .card-content h3 {
     margin: 8px 0;
-    font-size: 0.95rem;
-    line-height: 1.3;
-    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--color-primary);
   }
 
   .card-content p {
-    margin: 6px 0;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    color: var(--color-text);
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

@@ -28,25 +28,21 @@ const categories = ['All', ...new Set(posts.map(p => p.category))];
 ---
 
 <Layout title={title}>
-  <!-- Press Start Section -->
-  <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: #fff; border: 3px solid #333; box-shadow: 8px 8px 0 rgba(0,0,0,0.2);">
-    <div style="font-family: 'Press Start 2P', monospace; font-size: 2rem; letter-spacing: 4px; margin-bottom: 1rem; color: #000;">
-      {SITE_NAME}
-    </div>
-    <p style="font-size: 1rem; color: #666; font-family: 'Courier New', monospace;">
-      {SITE_DESCRIPTION}
-    </p>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero-title">{SITE_NAME}</h1>
+    <p class="hero-description">{SITE_DESCRIPTION}</p>
+  </section>
 
   <!-- Category Tabs -->
   <CategoryTabs categories={categories} />
 
   <!-- Blog Posts Grid -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+  <section class="posts-grid">
     {posts.length > 0 ? (
       posts.map((post) => (
         <div data-category={post.category}>
-          <a href={`/posts/${post.id}`} style="text-decoration: none;">
+          <a href={`/posts/${post.id}`} class="post-link">
             <BlogCard
               tag={post.tag}
               date={post.date}
@@ -59,11 +55,72 @@ const categories = ['All', ...new Set(posts.map(p => p.category))];
         </div>
       ))
     ) : (
-      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: #fff; border: 2px solid #333;">
-        <p style="font-family: 'Courier New', monospace; color: #666;">
-          まだ記事がありません。microCMSで記事を作成してください。
-        </p>
+      <div class="empty-state">
+        <p>まだ記事がありません。</p>
       </div>
     )}
-  </div>
+  </section>
 </Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.75rem;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .post-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .empty-state p {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
