@@ -1,23 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- 左耳 -->
-  <circle cx="22" cy="22" r="18" fill="#8B4513"/>
-  <circle cx="22" cy="22" r="10" fill="#D2691E"/>
-  <!-- 右耳 -->
-  <circle cx="78" cy="22" r="18" fill="#8B4513"/>
-  <circle cx="78" cy="22" r="10" fill="#D2691E"/>
-  <!-- 顔 -->
-  <circle cx="50" cy="55" r="42" fill="#8B4513"/>
-  <!-- 顔の内側 -->
-  <ellipse cx="50" cy="62" rx="28" ry="25" fill="#D2691E"/>
-  <!-- 左目 -->
-  <circle cx="35" cy="48" r="6" fill="#000"/>
-  <circle cx="37" cy="46" r="2" fill="#fff"/>
-  <!-- 右目 -->
-  <circle cx="65" cy="48" r="6" fill="#000"/>
-  <circle cx="67" cy="46" r="2" fill="#fff"/>
-  <!-- 鼻 -->
-  <ellipse cx="50" cy="65" rx="8" ry="6" fill="#000"/>
-  <ellipse cx="50" cy="64" rx="3" ry="2" fill="#666"/>
-  <!-- 口 -->
-  <path d="M42 75 Q50 82 58 75" stroke="#000" stroke-width="2" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- 車体 -->
+  <rect x="2" y="8" width="20" height="10" rx="2" fill="#E91E63"/>
+  <!-- 屋根 -->
+  <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2" fill="#E91E63"/>
+  <!-- 窓 -->
+  <rect x="6" y="4" width="12" height="5" rx="1" fill="#F8BBD9"/>
+  <!-- タイヤ -->
+  <circle cx="7" cy="18" r="2.5" fill="#2C3E50"/>
+  <circle cx="7" cy="18" r="1" fill="#6C757D"/>
+  <circle cx="17" cy="18" r="2.5" fill="#2C3E50"/>
+  <circle cx="17" cy="18" r="1" fill="#6C757D"/>
+  <!-- ヘッドライト -->
+  <rect x="19" y="11" width="2" height="2" rx="0.5" fill="#FFF59D"/>
+  <rect x="3" y="11" width="2" height="2" rx="0.5" fill="#FFF59D"/>
 </svg>
