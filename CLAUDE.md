@@ -6,8 +6,8 @@
 
 ### ブランチ構成
 
-- `main` - 本番環境にデプロイされるブランチ
-- `release` - ステージング確認用ブランチ（PMが動作確認を行う）
+- `main` - 安定版ブランチ（releaseと同期）
+- `release` - 本番デプロイ用ブランチ（マージで自動デプロイ）
 - `feature/XX-description` - 機能開発用ブランチ
 - `hotfix/XX-description` - 緊急修正用ブランチ
 
@@ -15,14 +15,13 @@
 
 1. 作業前にIssueを起票する
    - Sub Issuesは別Issueではなく、親Issue内のチェックボックスでタスク管理する
-2. Issue番号を含むブランチ名で作業ブランチを切る（例: `feature/30-release-branch`）
+2. Issue番号を含むブランチ名で作業ブランチを切る（例: `feature/35-workflow-change`）
 3. 作業完了後、`release`ブランチへPRを作成する
-   - PRプレビュー機能でデプロイされたプレビューURLで動作確認可能
-4. PMがプレビューURLで動作確認を行う
-5. 問題がなければPMが`release`ブランチにマージする
-6. PMが`release` → `main`へPRを作成しマージする
-7. `main`へのマージで本番環境に自動デプロイされる
-8. デプロイ完了後、Issueをクローズする
+4. PMがローカルで動作確認・コードレビューを行う
+5. 問題がなければPMが`release`ブランチにマージ → 本番環境に自動デプロイ
+6. PMが本番環境で反映を確認する
+7. PMが`release` → `main`へPRを作成しマージする（同期）
+8. Issueをクローズする
 
 ### コミットルール
 
