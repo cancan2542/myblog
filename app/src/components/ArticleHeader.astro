@@ -98,13 +98,45 @@ const { title, image, date, category, tag } = Astro.props;
     font-family: var(--font-display);
   }
 
-  @media (max-width: 768px) {
-    .article-title {
-      font-size: 1.4rem;
+  /* Mobile: 〜767px */
+  @media (max-width: 767px) {
+    .article-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-image-wrapper {
+      margin-bottom: 1rem;
+      border-radius: var(--border-radius-sm);
+    }
+
+    .article-tag {
+      top: 8px;
+      left: 8px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
     }
 
     .article-meta {
       padding: 1rem;
+    }
+
+    .meta-badges {
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .category-badge {
+      padding: 3px 8px;
+      font-size: 0.7rem;
+    }
+
+    .date-text {
+      font-size: 0.8rem;
+    }
+
+    .article-title {
+      font-size: 1.25rem;
+      line-height: 1.5;
     }
   }
 </style>

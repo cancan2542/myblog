@@ -107,20 +107,31 @@
     transition: width 0.3s ease;
   }
 
-  @media (max-width: 600px) {
+  /* Mobile: 〜767px */
+  @media (max-width: 767px) {
     .trip-status {
       flex-wrap: wrap;
       justify-content: center;
       padding: 8px 12px;
+      gap: 8px;
     }
 
     .stats {
       gap: 8px;
     }
 
+    .stat-label {
+      font-size: 0.65rem;
+    }
+
+    .stat-value {
+      font-size: 0.85rem;
+    }
+
     .distance-bar {
       width: 100%;
       order: 1;
+      margin-top: 4px;
     }
   }
 </style>
