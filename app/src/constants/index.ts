@@ -11,4 +11,4 @@ export const DEFAULT_CATEGORIES = ['All', 'Spots', 'Gear', 'Tips', 'Review'];
 
 // サイト情報
 export const SITE_NAME = 'CanPark';
-export const SITE_DESCRIPTION = 'スポーツカーでもできる、車中泊のススメ。';
+export const SITE_DESCRIPTION = '気軽にできる、車中泊のススメ。';
